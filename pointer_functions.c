@@ -1,6 +1,7 @@
 #include "pointer_functions.h"
 
 #include <stdio.h>
+#include <assert.h>
 
 /* IMPORTANT:
  * ------------
@@ -23,6 +24,7 @@
  * The return value of the scanf()-function 
  */
 int readInteger(int* val) {
+    assert(val);
 	return scanf("%d", val);
 }
 
@@ -40,6 +42,7 @@ int readInteger(int* val) {
  * Nothing.
  */
 void increment(int* value) {
+      assert(value);
 	 *value += 1;
 }
 
@@ -62,6 +65,7 @@ void increment(int* value) {
  * Nothing.
  */
 void limit(double* value, double low, double high) {
+      assert(value);
      if (*value > high){
 	     *value = high;
 	 } else if (*value < low){
@@ -84,6 +88,9 @@ void limit(double* value, double low, double high) {
  * Nothing.
  */
 void sum(double* target, const double* operand1, const double* operand2) {
+      assert(target);
+	  assert(operand1);
+	  assert(operand2);
       *target = *operand1 + *operand2;
 	  
 }
@@ -103,6 +110,8 @@ void sum(double* target, const double* operand1, const double* operand2) {
  * Pointer to the larger value.
  */
 int* max(int* ptr1, int* ptr2) {
+     assert(ptr1);
+	 assert(ptr2);
     if (*ptr1 > *ptr2){
 	   return ptr1;
 	} else {
@@ -126,6 +135,8 @@ int* max(int* ptr1, int* ptr2) {
  * Nothing.
  */
 void sort2(double* ptr1, double* ptr2) {
+     assert(ptr1);
+	 assert(ptr2);
      if (*ptr1 > *ptr2){
 	     double temp = *ptr2;
          *ptr2 = *ptr1;
