@@ -1,4 +1,6 @@
 #include <stddef.h>
+#include <stdlib.h>
+#include <assert.h>
 
 /* DESCRIPTION:
  * ------------
@@ -21,8 +23,13 @@
  * ------------
  * A new dynamically allocated vector with s elements all initialized to val.
  */
-double* vectorConstruct(size_t s, double val) {
-	return NULL;
+double* vectorConstruct(size_t size, double initial_value) {
+	assert(size > 0);
+	double* vec = calloc(size, sizeof(double));
+	for (size_t i = 0; i < size; i++) {
+		vec[i] = initial_value;
+	}
+	return vec;
 }
 
 
@@ -42,6 +49,7 @@ double* vectorConstruct(size_t s, double val) {
  * Nothing.
  */
 void vectorDestruct(double* vec) {
+	free(vec);
 }
 
 
@@ -68,8 +76,14 @@ void vectorDestruct(double* vec) {
  * ------------
  * The dot product of the parameter vectors.
  */
-double dotProduct(double const* v1, double const* v2, size_t s) {
-	return 0.0;
+double dotProduct(double const* v1, double const* v2, size_t size) {
+	assert(v1);
+	assert(v2);
+	double product = 0.0;
+	for (size_t i = 0; i < size; i++) {
+		product += v1[i] * v2[i];
+	}
+	return product;
 }
 
 
@@ -99,8 +113,14 @@ double dotProduct(double const* v1, double const* v2, size_t s) {
  * A dynamically allocated vector, containing the sum of the two parameter 
  * vectors.
  */
-double* vectorSum(double const* v1, double const* v2, size_t s) {
-	return NULL;
+double* vectorSum(double const* v1, double const* v2, size_t size) {
+	assert(v1);
+	assert(v2);
+	double* result = vectorConstruct(size, 0.0);
+	for (size_t i = 0; i < size; i++) {
+		result[i] = v1[i] + v2[i];
+	}
+	return result;
 }
 
 
@@ -129,5 +149,24 @@ double* vectorSum(double const* v1, double const* v2, size_t s) {
  * ------------
  * Nothing.
  */
-void vectorAppend(double** v1, size_t* s1, double const* v2, size_t s2) {
+void vectorAppend(double** pv1, size_t* psize1, double const* v2, size_t size2) {
+	assert(pv1);
+	assert(psize1);
+	assert(v2);
+	double* v1 = *pv1;
+	size_t size1 = *psize1;
+	
+	size_t result_size = size1 + size2;
+	double* result = vectorConstruct(result_size, 0.0);
+	
+	for (size_t i = 0; i < size1; i++) {
+		result[i] = v1[i];
+	}
+	for (size_t i = 0; i < size2; i++) {
+		result[i + size1] = v2[i];
+	}
+	
+	free(*pv1);
+	*pv1 = result;
+	*psize1 = result_size;
 }
