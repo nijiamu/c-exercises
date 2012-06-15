@@ -22,8 +22,8 @@
  * ------------
  * The return value of the scanf()-function 
  */
-int readInteger(int *val) {
-	return 0;
+int readInteger(int* val) {
+	return scanf("%d", val);
 }
 
 
@@ -39,7 +39,8 @@ int readInteger(int *val) {
  * ------------
  * Nothing.
  */
-void increment(int *value) {
+void increment(int* value) {
+	 *value += 1;
 }
 
 /* DESCRIPTION:
@@ -60,7 +61,12 @@ void increment(int *value) {
  * ------------
  * Nothing.
  */
-void limit(double *value, double low, double high) {
+void limit(double* value, double low, double high) {
+     if (*value > high){
+	     *value = high;
+	 } else if (*value < low){
+	     *value = low;
+	 }
 }
 
 /* DESCRIPTION:
@@ -77,7 +83,9 @@ void limit(double *value, double low, double high) {
  * ------------
  * Nothing.
  */
-void sum(double *target, const double *sum1, const double *sum2) {
+void sum(double* target, const double* operand1, const double* operand2) {
+      *target = *operand1 + *operand2;
+	  
 }
 
 /* DESCRIPTION:
@@ -94,8 +102,13 @@ void sum(double *target, const double *sum1, const double *sum2) {
  * ------------
  * Pointer to the larger value.
  */
-int* max(int *ptr1, int *ptr2) {
-	return 0;
+int* max(int* ptr1, int* ptr2) {
+    if (*ptr1 > *ptr2){
+	   return ptr1;
+	} else {
+	   return ptr2;
+	}
+	
 }
 
 /* DESCRIPTION:
@@ -112,5 +125,11 @@ int* max(int *ptr1, int *ptr2) {
  * ------------
  * Nothing.
  */
-void sort2(double *ptr1, double *ptr2) {
+void sort2(double* ptr1, double* ptr2) {
+     if (*ptr1 > *ptr2){
+	     double temp = *ptr2;
+         *ptr2 = *ptr1;
+		 *ptr1 = temp;
+     
+	 }
 }
