@@ -1,6 +1,7 @@
 all:
-	gcc hello.c -o hello
-	gcc -std=c99 pointer_main.c pointer_functions.c -o pointer
+	gcc -Wall hello.c -o hello
+	gcc -std=c99 -Wall pointer_main.c pointer_functions.c -o pointer
+	gcc -std=c99 -Wall str_main.c str_functions.c -o str
 
 clean:
 	rm -rf *.exe
