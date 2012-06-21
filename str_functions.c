@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-
+#include <ctype.h>
 #include "str_functions.h"
 
 /* GENERAL:
@@ -42,8 +42,9 @@
  */
 char* swap_case(const char* str){
       assert(str);
-      char* result = calloc(strlen(str) + 1, sizeof(char));
-	  for (int i = 0; i < strlen(str) + 1; i++){
+	  int length = strlen(str);
+      char* result = calloc(length + 1, sizeof(char));
+	  for (int i = 0; i < length; i++){
 	      if (str[i] >= 'a' && str[i] <= 'z'){
 		      result[i] = str[i] - ('a' - 'A');
 		  }
@@ -80,7 +81,13 @@ char* swap_case(const char* str){
  * in the parameter string.
  */
 char* reverse(const char* str){
-	  return 0;
+	assert(str);
+	int length = strlen(str);
+	char* result = calloc(length + 1, sizeof(char));
+	for (int i = 0; i < length; i++){
+		result[i] = str[length - i - 1];
+	}
+	return result;
 }
 
 
@@ -116,7 +123,29 @@ char* reverse(const char* str){
  * characters removed.
  */
 char* strip(const char* str){
-	  return 0;
+   assert(str);
+	int length = strlen(str);
+	int start = 0;
+	int end = 0;
+	for (int i = 0; i < length; i++){
+		if (!isspace((int) str[i])){
+			start = i;
+			break;
+		}
+	}
+	end = start;
+	for (int i = start; i < length; i++){
+		if (!isspace((int) str[i])){
+			end = i;
+		}
+	}
+	int result_length = end - start + 1;
+	char* result = calloc(result_length + 1, sizeof(char));
+	for (int i = 0; i < result_length; i++){
+		result[i] = str[start + i];
+	}
+	return result;
+
 }
 
 
@@ -158,5 +187,5 @@ char* strip(const char* str){
  * pattern substituted with the sub parameter.
  */
 char* substitute(const char* str, const char* pattern, const char* sub){
-	  return 0;
+	return 0;
 }
