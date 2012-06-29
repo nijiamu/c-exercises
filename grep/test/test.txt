@@ -1,0 +1,4 @@
+this is a test file
+is a test file
+this a test file
+last line has no newline

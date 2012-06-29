@@ -1,0 +1,7 @@
+my second test file
+this test file has some empty lines between text
+
+
+this also a decent test file
+last line has a newline at the end
+
