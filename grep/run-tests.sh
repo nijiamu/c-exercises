@@ -18,7 +18,7 @@ function test {
 	else
 		sh -c "$command" > $actual || true
 	fi
-	diff $expected $actual || true
+	diff -y $expected $actual || true
 }
 
 make
