@@ -5,16 +5,20 @@ function test {
 	name=$1
 	args=`cat $name.args`
 	command="../my_grep $args"
+	actual="$name.actual"
+	expected="$name.expected"
+
 	echo
 	echo $name:
 	echo "$ $command"
-	rm -f $name.actual
-	if [ -f $name.input ]; then
-		cat $name.input | $command > $name.actual || true
+
+	rm -f $actual
+	if [ -f $actual ]; then
+		cat $actual | sh -c "$command" > $actual || true
 	else
-		$command > $name.actual || true
+		sh -c "$command" > $actual || true
 	fi
-	diff $name.expected $name.actual || true
+	diff $expected $actual || true
 }
 
 make

@@ -8,6 +8,7 @@ int main(int argc, char *argv[]) {
 		printf("USAGE: %s [PATTERN] [FILE]...\n", argv[0]);
 		return 0;
 	}
+	char* pattern = argv[1];
 	char* filename = argv[2];
 
 	struct stat st;
@@ -15,12 +16,17 @@ int main(int argc, char *argv[]) {
 	size_t filesize = st.st_size;
 
 	FILE *fp = fopen(filename, "r");
-	
+
 	char *line = calloc(filesize, sizeof(char));
+	int linenumber = 0;
 	while (fgets(line, filesize, fp) != NULL) {
-		printf("%s", line);
+		linenumber++;
+		char *found = strstr(line, pattern);
+		if (found != NULL){
+			printf("%s:%d:%s", filename, linenumber, line);
+		}
 	}
-	
+
 	free(line);
 	fclose(fp);
     return 0;
