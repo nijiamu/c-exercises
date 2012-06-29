@@ -1,0 +1,2 @@
+test.txt:4:last line has no newline
+test2.txt:6:last line has a newline at the end
