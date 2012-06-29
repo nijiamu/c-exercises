@@ -8,8 +8,12 @@ function test {
 	echo
 	echo $name:
 	echo "$ $command"
-	$command > $name.actual
-	diff  $name.expected $name.actual || true
+	if [ -f $name.input ]; then
+		cat $name.input | $command > $name.actual
+	else
+		$command > $name.actual
+	fi
+	diff $name.expected $name.actual || true
 }
 
 make
