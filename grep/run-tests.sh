@@ -8,10 +8,11 @@ function test {
 	echo
 	echo $name:
 	echo "$ $command"
+	rm -f $name.actual
 	if [ -f $name.input ]; then
-		cat $name.input | $command > $name.actual
+		cat $name.input | $command > $name.actual || true
 	else
-		$command > $name.actual
+		$command > $name.actual || true
 	fi
 	diff $name.expected $name.actual || true
 }
